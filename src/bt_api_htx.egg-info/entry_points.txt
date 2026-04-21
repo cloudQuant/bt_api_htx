@@ -1,0 +1,2 @@
+[bt_api.plugins]
+htx = bt_api_htx.plugin:register_plugin
