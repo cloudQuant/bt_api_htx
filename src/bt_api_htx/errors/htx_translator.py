@@ -6,7 +6,7 @@ Translate HTX (Huobi) API error codes to unified error codes
 
 from __future__ import annotations
 
-from bt_api_base.error import ErrorTranslator, UnifiedErrorCode, UnifiedError, ErrorCategory
+from bt_api_base.error import ErrorCategory, ErrorTranslator, UnifiedError, UnifiedErrorCode
 
 
 class HtxErrorTranslator(ErrorTranslator):

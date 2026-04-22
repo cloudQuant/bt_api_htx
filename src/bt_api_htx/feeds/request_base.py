@@ -13,12 +13,13 @@ from datetime import datetime
 from typing import Any
 
 from bt_api_base.containers.requestdatas.request_data import RequestData
-from bt_api_htx.errors.htx_translator import HtxErrorTranslator
 from bt_api_base.exceptions import QueueNotInitializedError
 from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
 from bt_api_base.rate_limiter import RateLimiter, RateLimitRule, RateLimitScope, RateLimitType
+
+from bt_api_htx.errors.htx_translator import HtxErrorTranslator
 
 
 class HtxRequestData(Feed):

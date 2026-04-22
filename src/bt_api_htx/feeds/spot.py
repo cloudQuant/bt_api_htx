@@ -6,18 +6,19 @@ import json
 from typing import Any
 
 from bt_api_base._compat import UTC
+from bt_api_base.feeds.my_websocket_app import MyWebsocketApp
+from bt_api_base.functions.utils import update_extra_data
+from bt_api_base.logging_factory import get_logger
+
 from bt_api_htx.containers.accounts.htx_account import HtxSpotRequestAccountData
 from bt_api_htx.containers.balances.htx_balance import HtxRequestBalanceData
 from bt_api_htx.containers.bars.htx_bar import HtxRequestBarData
-from bt_api_htx.exchange_data.htx_exchange_data import HtxExchangeDataSpot
 from bt_api_htx.containers.orderbooks.htx_orderbook import HtxRequestOrderBookData
 from bt_api_htx.containers.orders.htx_order import HtxRequestOrderData
 from bt_api_htx.containers.tickers.htx_ticker import HtxRequestTickerData
 from bt_api_htx.containers.trades.htx_trade import HtxRequestTradeData
+from bt_api_htx.exchange_data.htx_exchange_data import HtxExchangeDataSpot
 from bt_api_htx.feeds.request_base import HtxRequestData
-from bt_api_base.feeds.my_websocket_app import MyWebsocketApp
-from bt_api_base.functions.utils import update_extra_data
-from bt_api_base.logging_factory import get_logger
 
 
 class HtxRequestDataSpot(HtxRequestData):

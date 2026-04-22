@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from bt_api_base.balance_utils import simple_balance_handler as _htx_balance_handler
 from bt_api_base.registry import ExchangeRegistry
+
 from bt_api_htx.exchange_data import (
     HtxExchangeDataCoinSwap,
     HtxExchangeDataMargin,

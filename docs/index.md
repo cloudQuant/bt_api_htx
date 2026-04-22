@@ -11,9 +11,18 @@ pip install bt_api_htx
 ```
 
 ```python
-from bt_api_htx import HTXApi
-feed = HTXApi(api_key="your_key", secret="your_secret")
-ticker = feed.get_ticker("btcusdt")
+from bt_api import BtApi
+
+api = BtApi(
+    exchange_kwargs={
+        "HTX___SPOT": {
+            "api_key": "your_api_key",
+            "secret": "your_secret",
+        }
+    }
+)
+ticker = api.get_tick("HTX___SPOT", "btcusdt")
+print(ticker)
 ```
 
 ## 中文
@@ -27,9 +36,18 @@ pip install bt_api_htx
 ```
 
 ```python
-from bt_api_htx import HTXApi
-feed = HTXApi(api_key="your_key", secret="your_secret")
-ticker = feed.get_ticker("btcusdt")
+from bt_api import BtApi
+
+api = BtApi(
+    exchange_kwargs={
+        "HTX___SPOT": {
+            "api_key": "your_api_key",
+            "secret": "your_secret",
+        }
+    }
+)
+ticker = api.get_tick("HTX___SPOT", "btcusdt")
+print(ticker)
 ```
 
 ## API Reference
