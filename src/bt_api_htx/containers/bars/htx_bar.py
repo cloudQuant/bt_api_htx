@@ -92,9 +92,7 @@ class HtxRequestBarData(BarData):
             return self
 
         if not self.has_been_json_encoded:
-            self.bar_data = (
-                json.loads(self.bar_info) if isinstance(self.bar_info, str) else self.bar_info
-            )
+            self.bar_data = json.loads(self.bar_info) if isinstance(self.bar_info, str) else self.bar_info
             self.has_been_json_encoded = True
 
         if self.bar_data:

@@ -295,9 +295,7 @@ class HtxRequestDataUsdtSwap(HtxRequestData):
 
     def cancel_order(self, symbol, order_id, extra_data=None, **kwargs):
         """Cancel an order."""
-        path, body, extra_data = self._cancel_order(
-            symbol=symbol, order_id=order_id, extra_data=extra_data, **kwargs
-        )
+        path, body, extra_data = self._cancel_order(symbol=symbol, order_id=order_id, extra_data=extra_data, **kwargs)
         return self.request(path, params={}, body=body, extra_data=extra_data)
 
     def query_order(self, symbol, order_id, extra_data=None, **kwargs):

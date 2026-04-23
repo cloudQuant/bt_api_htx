@@ -81,9 +81,7 @@ class HtxSpotRequestAccountData(AccountData):
 
         if not self.has_been_json_encoded:
             account_info_parsed = (
-                json.loads(self.account_info)
-                if isinstance(self.account_info, str)
-                else self.account_info
+                json.loads(self.account_info) if isinstance(self.account_info, str) else self.account_info
             )
             self.account_data = account_info_parsed
 

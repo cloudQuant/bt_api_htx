@@ -13,9 +13,7 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 class HtxRequestOrderData(OrderData):
     """HTX REST API order data."""
 
-    def __init__(
-        self, order_info, symbol_name, asset_type, has_been_json_encoded: bool = False
-    ) -> None:
+    def __init__(self, order_info, symbol_name, asset_type, has_been_json_encoded: bool = False) -> None:
         super().__init__(order_info, has_been_json_encoded)
         self.exchange_name = "HTX"
         self.local_update_time = time.time()
@@ -87,9 +85,7 @@ class HtxRequestOrderData(OrderData):
         # Price and quantity
         self.order_price = from_dict_get_float(self.order_data, "price")
         self.order_qty = from_dict_get_float(self.order_data, "amount")
-        self.order_avg_price = from_dict_get_float(
-            self.order_data, "field-amount"
-        )  # field-cash-amount / field-amount
+        self.order_avg_price = from_dict_get_float(self.order_data, "field-amount")  # field-cash-amount / field-amount
         self.order_filled_qty = from_dict_get_float(self.order_data, "field-amount")
 
         # Order status

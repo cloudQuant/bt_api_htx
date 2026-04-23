@@ -91,13 +91,9 @@ class HtxErrorTranslator(ErrorTranslator):
         error_lower = error_msg.lower()
 
         if "invalid api key" in error_lower:
-            return cls._create_unified_error(
-                UnifiedErrorCode.INVALID_API_KEY, "Invalid API key", venue, error_msg
-            )
+            return cls._create_unified_error(UnifiedErrorCode.INVALID_API_KEY, "Invalid API key", venue, error_msg)
         elif "invalid signature" in error_lower or "signature not valid" in error_lower:
-            return cls._create_unified_error(
-                UnifiedErrorCode.INVALID_SIGNATURE, "Invalid signature", venue, error_msg
-            )
+            return cls._create_unified_error(UnifiedErrorCode.INVALID_SIGNATURE, "Invalid signature", venue, error_msg)
         elif "rate limit" in error_lower or "too many requests" in error_lower:
             return cls._create_unified_error(
                 UnifiedErrorCode.RATE_LIMIT_EXCEEDED, "Rate limit exceeded", venue, error_msg
@@ -107,26 +103,18 @@ class HtxErrorTranslator(ErrorTranslator):
                 UnifiedErrorCode.INSUFFICIENT_BALANCE, "Insufficient balance", venue, error_msg
             )
         elif "order not found" in error_lower:
-            return cls._create_unified_error(
-                UnifiedErrorCode.ORDER_NOT_FOUND, "Order not found", venue, error_msg
-            )
+            return cls._create_unified_error(UnifiedErrorCode.ORDER_NOT_FOUND, "Order not found", venue, error_msg)
         elif "symbol" in error_lower and ("invalid" in error_lower or "not found" in error_lower):
-            return cls._create_unified_error(
-                UnifiedErrorCode.INVALID_SYMBOL, "Invalid trading pair", venue, error_msg
-            )
+            return cls._create_unified_error(UnifiedErrorCode.INVALID_SYMBOL, "Invalid trading pair", venue, error_msg)
         elif "permission" in error_lower:
-            return cls._create_unified_error(
-                UnifiedErrorCode.PERMISSION_DENIED, "Permission denied", venue, error_msg
-            )
+            return cls._create_unified_error(UnifiedErrorCode.PERMISSION_DENIED, "Permission denied", venue, error_msg)
         elif "maintenance" in error_lower:
             return cls._create_unified_error(
                 UnifiedErrorCode.EXCHANGE_MAINTENANCE, "System under maintenance", venue, error_msg
             )
 
         # Fallback for unknown string errors
-        return cls._create_unified_error(
-            UnifiedErrorCode.INTERNAL_ERROR, error_msg, venue, error_msg
-        )
+        return cls._create_unified_error(UnifiedErrorCode.INTERNAL_ERROR, error_msg, venue, error_msg)
 
     @classmethod
     def translate_dict_error(cls, error_dict: dict, venue: str):
@@ -150,9 +138,7 @@ class HtxErrorTranslator(ErrorTranslator):
 
         if err_code in cls.ERROR_MAP:
             unified_code, default_msg = cls.ERROR_MAP[err_code]
-            return cls._create_unified_error(
-                unified_code, err_msg or default_msg, venue, f"{err_code}: {err_msg}"
-            )
+            return cls._create_unified_error(unified_code, err_msg or default_msg, venue, f"{err_code}: {err_msg}")
 
         # Check for specific error patterns in message
         if err_msg:
@@ -209,6 +195,4 @@ class HtxErrorTranslator(ErrorTranslator):
     @classmethod
     def _translate_fallback(cls, raw_error, venue: str):
         """Fallback translation for unknown error formats"""
-        return cls._create_unified_error(
-            UnifiedErrorCode.INTERNAL_ERROR, "Unknown error", venue, str(raw_error)
-        )
+        return cls._create_unified_error(UnifiedErrorCode.INTERNAL_ERROR, "Unknown error", venue, str(raw_error))
