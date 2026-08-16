@@ -13,12 +13,13 @@ from datetime import datetime
 from typing import Any
 
 from bt_api_base.containers.requestdatas.request_data import RequestData
-from bt_api_htx.errors.htx_translator import HtxErrorTranslator
 from bt_api_base.exceptions import QueueNotInitializedError
 from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
 from bt_api_base.rate_limiter import RateLimiter, RateLimitRule, RateLimitScope, RateLimitType
+
+from bt_api_htx.errors.htx_translator import HtxErrorTranslator
 
 
 class HtxRequestData(Feed):
@@ -46,9 +47,7 @@ class HtxRequestData(Feed):
         super().__init__(data_queue, **kwargs)
         self.data_queue = data_queue
         self.public_key = kwargs.get("public_key") or kwargs.get("api_key")
-        self.private_key = (
-            kwargs.get("private_key") or kwargs.get("secret_key") or kwargs.get("api_secret")
-        )
+        self.private_key = kwargs.get("private_key") or kwargs.get("secret_key") or kwargs.get("api_secret")
         self.account_id = kwargs.get("account_id")  # HTX requires account ID for trading
         self.topics = kwargs.get("topics", {})
         self.exchange_name = kwargs.get("exchange_name", "HTX___SPOT")
@@ -128,9 +127,7 @@ class HtxRequestData(Feed):
         payload = f"{method}\n{host}\n{path}\n{encoded_params}"
 
         # HMAC SHA256 signature
-        signature = hmac.new(
-            self.private_key.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256
-        ).digest()
+        signature = hmac.new(self.private_key.encode("utf-8"), payload.encode("utf-8"), hashlib.sha256).digest()
 
         # Base64 encoding
         signature = base64.b64encode(signature).decode()
@@ -229,9 +226,7 @@ class HtxRequestData(Feed):
 
         return RequestData(res, extra_data)
 
-    async def async_request(
-        self, path, params=None, body=None, extra_data=None, timeout=5
-    ) -> RequestData:
+    async def async_request(self, path, params=None, body=None, extra_data=None, timeout=5) -> RequestData:
         """Async HTTP request function.
 
         Args: path: Request path

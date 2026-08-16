@@ -6,18 +6,19 @@ import json
 from typing import Any
 
 from bt_api_base._compat import UTC
+from bt_api_base.feeds.my_websocket_app import MyWebsocketApp
+from bt_api_base.functions.utils import update_extra_data
+from bt_api_base.logging_factory import get_logger
+
 from bt_api_htx.containers.accounts.htx_account import HtxSpotRequestAccountData
 from bt_api_htx.containers.balances.htx_balance import HtxRequestBalanceData
 from bt_api_htx.containers.bars.htx_bar import HtxRequestBarData
-from bt_api_htx.exchange_data.htx_exchange_data import HtxExchangeDataSpot
 from bt_api_htx.containers.orderbooks.htx_orderbook import HtxRequestOrderBookData
 from bt_api_htx.containers.orders.htx_order import HtxRequestOrderData
 from bt_api_htx.containers.tickers.htx_ticker import HtxRequestTickerData
 from bt_api_htx.containers.trades.htx_trade import HtxRequestTradeData
+from bt_api_htx.exchange_data.htx_exchange_data import HtxExchangeDataSpot
 from bt_api_htx.feeds.request_base import HtxRequestData
-from bt_api_base.feeds.my_websocket_app import MyWebsocketApp
-from bt_api_base.functions.utils import update_extra_data
-from bt_api_base.logging_factory import get_logger
 
 
 class HtxRequestDataSpot(HtxRequestData):
@@ -67,11 +68,7 @@ class HtxRequestDataSpot(HtxRequestData):
         if input_data is None:
             return [], False
         status = input_data.get("status") == "ok"
-        data = [
-            HtxRequestTickerData(
-                input_data, extra_data["symbol_name"], extra_data["asset_type"], True
-            )
-        ]
+        data = [HtxRequestTickerData(input_data, extra_data["symbol_name"], extra_data["asset_type"], True)]
         return data, status
 
     def get_ticker(self, symbol, extra_data=None, **kwargs) -> Any:
@@ -124,11 +121,7 @@ class HtxRequestDataSpot(HtxRequestData):
         if input_data is None:
             return [], False
         status = input_data.get("status") == "ok"
-        data = [
-            HtxRequestOrderBookData(
-                input_data, extra_data["symbol_name"], extra_data["asset_type"], True
-            )
-        ]
+        data = [HtxRequestOrderBookData(input_data, extra_data["symbol_name"], extra_data["asset_type"], True)]
         return data, status
 
     def get_depth(self, symbol, depth_type="step0", extra_data=None, **kwargs) -> Any:
@@ -251,10 +244,7 @@ class HtxRequestDataSpot(HtxRequestData):
             return [], False
         status = input_data.get("status") == "ok"
         klines = input_data.get("data", [])
-        data = [
-            HtxRequestBarData(k, extra_data["symbol_name"], extra_data["asset_type"], True)
-            for k in klines
-        ]
+        data = [HtxRequestBarData(k, extra_data["symbol_name"], extra_data["asset_type"], True) for k in klines]
         return data, status
 
     def get_kline(self, symbol, period, count=200, extra_data=None, **kwargs) -> Any:
@@ -351,11 +341,7 @@ class HtxRequestDataSpot(HtxRequestData):
         if input_data is None:
             return [], False
         status = input_data.get("status") == "ok"
-        data = [
-            HtxRequestBalanceData(
-                input_data, extra_data["symbol_name"], extra_data["asset_type"], True
-            )
-        ]
+        data = [HtxRequestBalanceData(input_data, extra_data["symbol_name"], extra_data["asset_type"], True)]
         return data, status
 
     def get_balance(self, account_id=None, extra_data=None, **kwargs) -> Any:
@@ -463,9 +449,7 @@ class HtxRequestDataSpot(HtxRequestData):
         Returns: RequestData: Order response
 
         """
-        path, body, extra_data = self._make_order(
-            symbol, vol, price, order_type, client_order_id, extra_data, **kwargs
-        )
+        path, body, extra_data = self._make_order(symbol, vol, price, order_type, client_order_id, extra_data, **kwargs)
         return self.request(path, params={}, body=body, extra_data=extra_data)
 
     def _cancel_order(self, order_id, extra_data=None, **kwargs):
@@ -534,11 +518,7 @@ class HtxRequestDataSpot(HtxRequestData):
             return [], False
         status = input_data.get("status") == "ok"
         data = input_data.get("data", {})
-        order_data = [
-            HtxRequestOrderData(
-                data, extra_data.get("symbol_name", ""), extra_data["asset_type"], True
-            )
-        ]
+        order_data = [HtxRequestOrderData(data, extra_data.get("symbol_name", ""), extra_data["asset_type"], True)]
         return order_data, status
 
     def get_order(self, order_id, extra_data=None, **kwargs) -> Any:
@@ -590,14 +570,11 @@ class HtxRequestDataSpot(HtxRequestData):
         status = input_data.get("status") == "ok"
         data = input_data.get("data", [])
         orders = [
-            HtxRequestOrderData(order, extra_data["symbol_name"], extra_data["asset_type"], True)
-            for order in data
+            HtxRequestOrderData(order, extra_data["symbol_name"], extra_data["asset_type"], True) for order in data
         ]
         return orders, status
 
-    def get_orders(
-        self, symbol, states="submitted,partial-filled", extra_data=None, **kwargs
-    ) -> Any:
+    def get_orders(self, symbol, states="submitted,partial-filled", extra_data=None, **kwargs) -> Any:
         """Get order list.
 
         Args: symbol: Trading pair symbol

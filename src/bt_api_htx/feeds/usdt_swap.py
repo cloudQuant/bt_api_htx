@@ -9,11 +9,12 @@ from __future__ import annotations
 
 from typing import Any
 
+from bt_api_base.functions.utils import update_extra_data
+from bt_api_base.logging_factory import get_logger
+
 from bt_api_htx.exchange_data.htx_exchange_data import HtxExchangeDataUsdtSwap
 from bt_api_htx.feeds.request_base import HtxRequestData
 from bt_api_htx.feeds.spot import HtxAccountWssDataSpot, HtxMarketWssDataSpot
-from bt_api_base.functions.utils import update_extra_data
-from bt_api_base.logging_factory import get_logger
 
 
 class HtxRequestDataUsdtSwap(HtxRequestData):
@@ -293,9 +294,7 @@ class HtxRequestDataUsdtSwap(HtxRequestData):
 
     def cancel_order(self, symbol, order_id, extra_data=None, **kwargs):
         """Cancel an order."""
-        path, body, extra_data = self._cancel_order(
-            symbol=symbol, order_id=order_id, extra_data=extra_data, **kwargs
-        )
+        path, body, extra_data = self._cancel_order(symbol=symbol, order_id=order_id, extra_data=extra_data, **kwargs)
         return self.request(path, params={}, body=body, extra_data=extra_data)
 
     def query_order(self, symbol, order_id, extra_data=None, **kwargs):

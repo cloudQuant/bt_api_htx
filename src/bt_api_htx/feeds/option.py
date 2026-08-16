@@ -9,10 +9,11 @@ from __future__ import annotations
 
 from typing import Any
 
+from bt_api_base.logging_factory import get_logger
+
 from bt_api_htx.exchange_data.htx_exchange_data import HtxExchangeDataOption
 from bt_api_htx.feeds.spot import HtxAccountWssDataSpot, HtxMarketWssDataSpot
 from bt_api_htx.feeds.usdt_swap import HtxRequestDataUsdtSwap
-from bt_api_base.logging_factory import get_logger
 
 
 class HtxRequestDataOption(HtxRequestDataUsdtSwap):
