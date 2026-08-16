@@ -13,8 +13,7 @@ from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_strin
 class HtxRequestBalanceData(BalanceData):
     """HTX REST API balance data container.
 
-    Args:
-        balance_info: Balance information data
+    Args: balance_info: Balance information data
         symbol_name: Symbol name (e.g., "BTC")
         asset_type: Asset type (e.g., "SPOT")
         has_been_json_encoded: Whether data has been JSON encoded
@@ -29,8 +28,7 @@ class HtxRequestBalanceData(BalanceData):
     ) -> None:
         """Initialize HTX balance data.
 
-        Args:
-            balance_info: Balance information (dict or JSON string)
+        Args: balance_info: Balance information (dict or JSON string)
             symbol_name: Symbol name to query
             asset_type: Asset type
             has_been_json_encoded: Whether balance_info is already JSON encoded
@@ -124,8 +122,7 @@ class HtxRequestBalanceData(BalanceData):
     def get_all_data(self) -> dict[str, Any]:
         """Get all balance data as a dictionary.
 
-        Returns:
-            Dictionary containing all balance information
+        Returns: Dictionary containing all balance information
         """
         if self.all_data is None:
             self.all_data = {
@@ -141,8 +138,7 @@ class HtxRequestBalanceData(BalanceData):
     def __str__(self) -> str:
         """Return string representation of balance data.
 
-        Returns:
-            JSON string of all balance data
+        Returns: JSON string of all balance data
         """
         self.init_data()
         return json.dumps(self.get_all_data())
@@ -150,72 +146,63 @@ class HtxRequestBalanceData(BalanceData):
     def __repr__(self) -> str:
         """Return formal string representation.
 
-        Returns:
-            Same as __str__
+        Returns: Same as __str__
         """
         return self.__str__()
 
     def get_exchange_name(self) -> str:
         """Get exchange name.
 
-        Returns:
-            Exchange name string
+        Returns: Exchange name string
         """
         return self.exchange_name
 
     def get_symbol_name(self) -> str:
         """Get symbol name.
 
-        Returns:
-            Symbol name string
+        Returns: Symbol name string
         """
         return self.symbol_name
 
     def get_asset_type(self) -> str:
         """Get asset type.
 
-        Returns:
-            Asset type string
+        Returns: Asset type string
         """
         return self.asset_type
 
     def get_server_time(self) -> float:
         """Get server time (not available for HTX).
 
-        Returns:
-            0.0 as server time is not available
+        Returns: 0.0 as server time is not available
         """
         return 0.0
 
     def get_local_update_time(self) -> float:
         """Get local update timestamp.
 
-        Returns:
-            Local update time as Unix timestamp
+        Returns: Local update time as Unix timestamp
         """
         return self.local_update_time
 
     def get_account_id(self) -> str:
         """Get account ID (not available for HTX).
 
-        Returns:
-            Empty string as account ID is not available
+        Returns: Empty string as account ID is not available
         """
         return ""
 
     def get_account_type(self) -> str:
         """Get account type.
 
-        Returns:
-            Account type string
+        Returns: Account type string
         """
         return self.account_type
 
     def get_available_margin(self) -> float:
         """Get available margin balance.
 
-        Returns:
-            Available margin amount
+        Returns: Available margin amount
         """
         self.init_data()
         return self.available_margin
@@ -223,8 +210,7 @@ class HtxRequestBalanceData(BalanceData):
     def get_used_margin(self) -> float:
         """Get used/frozen margin balance.
 
-        Returns:
-            Used margin amount
+        Returns: Used margin amount
         """
         self.init_data()
         return self.used_margin

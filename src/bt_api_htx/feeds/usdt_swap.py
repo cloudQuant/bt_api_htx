@@ -25,6 +25,7 @@ class HtxRequestDataUsdtSwap(HtxRequestData):
     """
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "USDT_SWAP")
         self.logger_name = kwargs.get("logger_name", "htx_usdt_swap_feed.log")
@@ -37,12 +38,10 @@ class HtxRequestDataUsdtSwap(HtxRequestData):
     def _get_ticker(self, symbol, extra_data=None, **kwargs):
         """Get ticker data for a contract.
 
-        Args:
-            symbol: Contract code (e.g., BTC-USDT)
+        Args: symbol: Contract code (e.g., BTC-USDT)
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
         """
         request_type = "get_ticker"
         path = self._params.get_rest_path(request_type)
@@ -340,6 +339,7 @@ class HtxMarketWssDataUsdtSwap(HtxMarketWssDataSpot):
     """HTX USDT Swap Market WebSocket data feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataUsdtSwap())
         kwargs.setdefault("asset_type", "USDT_SWAP")
         super().__init__(data_queue, **kwargs)
@@ -349,6 +349,7 @@ class HtxAccountWssDataUsdtSwap(HtxAccountWssDataSpot):
     """HTX USDT Swap Account WebSocket data feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataUsdtSwap())
         kwargs.setdefault("asset_type", "USDT_SWAP")
         super().__init__(data_queue, **kwargs)

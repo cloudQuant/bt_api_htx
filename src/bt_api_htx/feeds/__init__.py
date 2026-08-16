@@ -1,4 +1,5 @@
 # HTX Exchange Feed
+"""Module-level docstring."""
 from __future__ import annotations
 
 from bt_api_htx.feeds.coin_swap import (

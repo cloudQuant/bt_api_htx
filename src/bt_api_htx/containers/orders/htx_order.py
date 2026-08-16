@@ -16,6 +16,7 @@ class HtxRequestOrderData(OrderData):
     def __init__(
         self, order_info, symbol_name, asset_type, has_been_json_encoded: bool = False
     ) -> None:
+        """__init__ method"""
         super().__init__(order_info, has_been_json_encoded)
         self.exchange_name = "HTX"
         self.local_update_time = time.time()
@@ -104,6 +105,7 @@ class HtxRequestOrderData(OrderData):
         self.has_been_init_data = True
 
     def get_all_data(self) -> dict[str, Any]:
+        """get_all_data method"""
         if self.all_data is None:
             order_status_val = ""
             if self.order_status is not None:
@@ -136,61 +138,77 @@ class HtxRequestOrderData(OrderData):
         return self.__str__()
 
     def get_exchange_name(self) -> str:
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self) -> str:
+        """get_symbol_name method"""
         return str(self.symbol_name)
 
     def get_asset_type(self) -> str:
+        """get_asset_type method"""
         return str(self.asset_type)
 
     def get_order_id(self) -> Any:
+        """get_order_id method"""
         self.init_data()
         return self.order_id
 
     def get_client_order_id(self) -> Any:
+        """get_client_order_id method"""
         self.init_data()
         return self.client_order_id
 
     def get_order_symbol_name(self) -> Any:
+        """get_order_symbol_name method"""
         self.init_data()
         return self.order_symbol_name
 
     def get_order_side(self) -> Any:
+        """get_order_side method"""
         self.init_data()
         return self.order_side  # String: 'BUY' or 'SELL'
 
     def get_order_type(self) -> Any:
+        """get_order_type method"""
         self.init_data()
         return self.order_type  # String: 'LIMIT', 'MARKET', etc.
 
     def get_order_price(self) -> Any:
+        """get_order_price method"""
         self.init_data()
         return self.order_price
 
     def get_order_qty(self) -> Any:
+        """get_order_qty method"""
         self.init_data()
         return self.order_qty
 
     def get_order_avg_price(self) -> Any:
+        """get_order_avg_price method"""
         self.init_data()
         return self.order_avg_price
 
     def get_order_filled_qty(self) -> Any:
+        """get_order_filled_qty method"""
         self.init_data()
         return self.order_filled_qty
 
     def get_order_status(self) -> Any:
+        """get_order_status method"""
         self.init_data()
         return self.order_status
 
     def get_create_time(self) -> Any:
+        """get_create_time method"""
         self.init_data()
         return self.create_time
 
     def get_update_time(self) -> Any:
+        """get_update_time method"""
         self.init_data()
         return self.update_time

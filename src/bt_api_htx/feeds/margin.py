@@ -22,8 +22,7 @@ class HtxRequestDataMargin(HtxRequestDataSpot):
     def __init__(self, data_queue: Any, **kwargs: Any) -> None:
         """Initialize HTX Margin request data feed.
 
-        Args:
-            data_queue: Data queue for pushing market data
+        Args: data_queue: Data queue for pushing market data
             **kwargs: Additional keyword arguments
         """
         kwargs.setdefault("exchange_data", HtxExchangeDataMargin())
@@ -37,8 +36,7 @@ class HtxMarketWssDataMargin(HtxMarketWssDataSpot):
     def __init__(self, data_queue: Any, **kwargs: Any) -> None:
         """Initialize HTX Margin market WebSocket data feed.
 
-        Args:
-            data_queue: Data queue for pushing market data
+        Args: data_queue: Data queue for pushing market data
             **kwargs: Additional keyword arguments
         """
         kwargs.setdefault("exchange_data", HtxExchangeDataMargin())
@@ -52,8 +50,7 @@ class HtxAccountWssDataMargin(HtxAccountWssDataSpot):
     def __init__(self, data_queue: Any, **kwargs: Any) -> None:
         """Initialize HTX Margin account WebSocket data feed.
 
-        Args:
-            data_queue: Data queue for pushing account data
+        Args: data_queue: Data queue for pushing account data
             **kwargs: Additional keyword arguments
         """
         kwargs.setdefault("exchange_data", HtxExchangeDataMargin())

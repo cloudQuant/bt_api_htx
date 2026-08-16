@@ -22,8 +22,7 @@ class HtxRequestTickerData(TickerData):
     ) -> None:
         """Initialize Htx ticker data container.
 
-        Args:
-            ticker_info: Raw ticker data from API (JSON string or dict).
+        Args: ticker_info: Raw ticker data from API (JSON string or dict).
             symbol_name: Trading symbol name.
             asset_type: Asset type (e.g., "SPOT", "FUTURE").
             has_been_json_encoded: Whether ticker_info is already parsed.
@@ -102,6 +101,7 @@ class HtxRequestTickerData(TickerData):
         return self
 
     def get_all_data(self) -> dict[str, Any]:
+        """get_all_data method"""
         if self.all_data is None:
             self.init_data()
             self.all_data = {
@@ -127,39 +127,50 @@ class HtxRequestTickerData(TickerData):
         return self.__str__()
 
     def get_exchange_name(self) -> str:
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self) -> str:
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_ticker_symbol_name(self) -> str | None:
+        """get_ticker_symbol_name method"""
         return self.ticker_symbol_name
 
     def get_asset_type(self) -> str:
+        """get_asset_type method"""
         return self.asset_type
 
     def get_server_time(self) -> float | None:
+        """get_server_time method"""
         return self.server_time
 
     def get_bid_price(self) -> float | None:
+        """get_bid_price method"""
         self.init_data()
         return self.bid_price
 
     def get_ask_price(self) -> float | None:
+        """get_ask_price method"""
         self.init_data()
         return self.ask_price
 
     def get_bid_volume(self) -> float | None:
+        """get_bid_volume method"""
         self.init_data()
         return self.bid_volume
 
     def get_ask_volume(self) -> float | None:
+        """get_ask_volume method"""
         self.init_data()
         return self.ask_volume
 
     def get_last_price(self) -> float | None:
+        """get_last_price method"""
         self.init_data()
         return self.last_price

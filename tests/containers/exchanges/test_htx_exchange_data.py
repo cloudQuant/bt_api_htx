@@ -17,6 +17,7 @@ class TestHtxExchangeData:
         assert exchange.exchange_name == "htx"
 
     def test_symbol_and_period_conversions(self):
+        """test_symbol_and_period_conversions method"""
         exchange = HtxExchangeData()
 
         assert exchange.get_symbol("BTC/USDT") == "btcusdt"
@@ -25,6 +26,7 @@ class TestHtxExchangeData:
         assert exchange.get_standard_period("1min") == "1m"
 
     def test_get_rest_path(self):
+        """test_get_rest_path method"""
         exchange = HtxExchangeData()
         exchange.rest_paths = {"get_tick": "/market/detail/merged"}
 
@@ -32,6 +34,7 @@ class TestHtxExchangeData:
         assert exchange.get_rest_path("missing") == ""
 
     def test_get_wss_path_builds_subscription_message(self):
+        """test_get_wss_path_builds_subscription_message method"""
         exchange = HtxExchangeData()
         exchange.wss_paths = {
             "depth": {"params": ["{symbol}.depth.{type}"], "method": "SUBSCRIBE", "id": 1}
@@ -43,5 +46,6 @@ class TestHtxExchangeData:
         assert payload["id"] == "depth_BTC/USDT"
 
     def test_get_wss_path_returns_empty_payload_for_unknown_topic(self):
+        """test_get_wss_path_returns_empty_payload_for_unknown_topic method"""
         exchange = HtxExchangeData()
         assert exchange.get_wss_path(topic="unknown") == "{}"

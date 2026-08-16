@@ -13,6 +13,7 @@ class HtxRequestOrderBookData(OrderBookData):
     """HTX REST API orderbook data."""
 
     def __init__(self, order_book_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(order_book_info, has_been_json_encoded)
         self.exchange_name = "HTX"
         self.local_update_time = time.time()
@@ -79,6 +80,7 @@ class HtxRequestOrderBookData(OrderBookData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
                 "exchange_name": self.exchange_name,
@@ -102,37 +104,47 @@ class HtxRequestOrderBookData(OrderBookData):
         return self.__str__()
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_order_book_symbol_name(self):
+        """get_order_book_symbol_name method"""
         self.init_data()
         return self.order_book_symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_server_time(self):
+        """get_server_time method"""
         self.init_data()
         return self.server_time
 
     def get_bid_price_list(self):
+        """get_bid_price_list method"""
         self.init_data()
         return self.bid_price_list
 
     def get_ask_price_list(self):
+        """get_ask_price_list method"""
         self.init_data()
         return self.ask_price_list
 
     def get_bid_volume_list(self):
+        """get_bid_volume_list method"""
         self.init_data()
         return self.bid_volume_list
 
     def get_ask_volume_list(self):
+        """get_ask_volume_list method"""
         self.init_data()
         return self.ask_volume_list

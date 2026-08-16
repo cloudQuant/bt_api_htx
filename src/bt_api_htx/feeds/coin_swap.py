@@ -23,6 +23,7 @@ class HtxRequestDataCoinSwap(HtxRequestDataUsdtSwap):
     """
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "COIN_SWAP")
         self.logger_name = kwargs.get("logger_name", "htx_coin_swap_feed.log")
@@ -35,6 +36,7 @@ class HtxMarketWssDataCoinSwap(HtxMarketWssDataSpot):
     """HTX Coin Swap Market WebSocket data feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataCoinSwap())
         kwargs.setdefault("asset_type", "COIN_SWAP")
         super().__init__(data_queue, **kwargs)
@@ -44,6 +46,7 @@ class HtxAccountWssDataCoinSwap(HtxAccountWssDataSpot):
     """HTX Coin Swap Account WebSocket data feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataCoinSwap())
         kwargs.setdefault("asset_type", "COIN_SWAP")
         super().__init__(data_queue, **kwargs)

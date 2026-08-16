@@ -16,8 +16,7 @@ class HtxRequestBarData(BarData):
     This class handles bar (candlestick/kline) data from HTX (Huobi) exchange's REST API.
     It parses and stores bar information including OHLC prices, volume, and trade counts.
 
-    Attributes:
-        exchange_name: Exchange identifier ("HTX").
+    Attributes: exchange_name: Exchange identifier ("HTX").
         symbol_name: Trading symbol name.
         asset_type: Asset type for the bar data.
         server_time: Server timestamp.
@@ -45,8 +44,7 @@ class HtxRequestBarData(BarData):
     ) -> None:
         """Initialize HTX bar data container.
 
-        Args:
-            bar_info: Bar information from HTX API (dict or JSON string).
+        Args: bar_info: Bar information from HTX API (dict or JSON string).
             symbol_name: Trading symbol name.
             asset_type: Asset type for the bar data.
             has_been_json_encoded: Whether bar_info is already JSON encoded.
@@ -85,8 +83,7 @@ class HtxRequestBarData(BarData):
             "count": 10000         # number of trades
         }
 
-        Returns:
-            Self for method chaining.
+        Returns: Self for method chaining.
         """
         if self.has_been_init_data:
             return self
@@ -115,8 +112,7 @@ class HtxRequestBarData(BarData):
     def get_all_data(self) -> dict[str, Any]:
         """Get all bar data as a dictionary.
 
-        Returns:
-            Dictionary containing all bar information including server time,
+        Returns: Dictionary containing all bar information including server time,
             open time, OHLC prices, volume, amount, and trade counts.
         """
         if not self.has_been_init_data:
@@ -143,8 +139,7 @@ class HtxRequestBarData(BarData):
     def __str__(self) -> str:
         """Return string representation of bar data.
 
-        Returns:
-            JSON string of all bar data.
+        Returns: JSON string of all bar data.
         """
         self.init_data()
         return json.dumps(self.get_all_data())
@@ -152,56 +147,49 @@ class HtxRequestBarData(BarData):
     def __repr__(self) -> str:
         """Return representation of bar data.
 
-        Returns:
-            Same as __str__.
+        Returns: Same as __str__.
         """
         return self.__str__()
 
     def get_exchange_name(self) -> str:
         """Get exchange name.
 
-        Returns:
-            Exchange identifier "HTX".
+        Returns: Exchange identifier "HTX".
         """
         return self.exchange_name
 
     def get_local_update_time(self) -> float:
         """Get local update timestamp.
 
-        Returns:
-            Local timestamp when data was last updated.
+        Returns: Local timestamp when data was last updated.
         """
         return self.local_update_time
 
     def get_symbol_name(self) -> str:
         """Get symbol name.
 
-        Returns:
-            Trading symbol name.
+        Returns: Trading symbol name.
         """
         return self.symbol_name
 
     def get_asset_type(self) -> str:
         """Get asset type.
 
-        Returns:
-            Asset type for the bar data.
+        Returns: Asset type for the bar data.
         """
         return self.asset_type
 
     def get_server_time(self) -> float | None:
         """Get server timestamp.
 
-        Returns:
-            Server timestamp or None if not initialized.
+        Returns: Server timestamp or None if not initialized.
         """
         return self.server_time
 
     def get_open_time(self) -> float | None:
         """Get bar open timestamp.
 
-        Returns:
-            Bar open timestamp or None if not initialized.
+        Returns: Bar open timestamp or None if not initialized.
         """
         self.init_data()
         return self.open_time
@@ -209,8 +197,7 @@ class HtxRequestBarData(BarData):
     def get_open_price(self) -> float | None:
         """Get bar open price.
 
-        Returns:
-            Bar open price or None if not initialized.
+        Returns: Bar open price or None if not initialized.
         """
         self.init_data()
         return self.open_price
@@ -218,8 +205,7 @@ class HtxRequestBarData(BarData):
     def get_high_price(self) -> float | None:
         """Get bar high price.
 
-        Returns:
-            Bar high price or None if not initialized.
+        Returns: Bar high price or None if not initialized.
         """
         self.init_data()
         return self.high_price
@@ -227,8 +213,7 @@ class HtxRequestBarData(BarData):
     def get_low_price(self) -> float | None:
         """Get bar low price.
 
-        Returns:
-            Bar low price or None if not initialized.
+        Returns: Bar low price or None if not initialized.
         """
         self.init_data()
         return self.low_price
@@ -236,8 +221,7 @@ class HtxRequestBarData(BarData):
     def get_close_price(self) -> float | None:
         """Get bar close price.
 
-        Returns:
-            Bar close price or None if not initialized.
+        Returns: Bar close price or None if not initialized.
         """
         self.init_data()
         return self.close_price
@@ -245,8 +229,7 @@ class HtxRequestBarData(BarData):
     def get_volume(self) -> float | None:
         """Get bar volume.
 
-        Returns:
-            Bar volume or None if not initialized.
+        Returns: Bar volume or None if not initialized.
         """
         self.init_data()
         return self.volume
@@ -254,8 +237,7 @@ class HtxRequestBarData(BarData):
     def get_amount(self) -> float | None:
         """Get bar amount.
 
-        Returns:
-            Bar amount or None if not initialized.
+        Returns: Bar amount or None if not initialized.
         """
         self.init_data()
         return self.amount
@@ -263,8 +245,7 @@ class HtxRequestBarData(BarData):
     def get_num_trades(self) -> float | None:
         """Get number of trades in the bar.
 
-        Returns:
-            Number of trades or None if not initialized.
+        Returns: Number of trades or None if not initialized.
         """
         self.init_data()
         return self.num_trades
@@ -272,8 +253,7 @@ class HtxRequestBarData(BarData):
     def get_bar_status(self) -> bool | None:
         """Get bar status.
 
-        Returns:
-            Bar status or None if not initialized.
+        Returns: Bar status or None if not initialized.
         """
         self.init_data()
         return self.bar_status

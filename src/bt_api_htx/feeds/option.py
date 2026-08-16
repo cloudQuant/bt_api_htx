@@ -23,6 +23,7 @@ class HtxRequestDataOption(HtxRequestDataUsdtSwap):
     """
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "OPTION")
         self.logger_name = kwargs.get("logger_name", "htx_option_feed.log")
@@ -35,6 +36,7 @@ class HtxMarketWssDataOption(HtxMarketWssDataSpot):
     """HTX Option Market WebSocket data feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataOption())
         kwargs.setdefault("asset_type", "OPTION")
         super().__init__(data_queue, **kwargs)
@@ -44,6 +46,7 @@ class HtxAccountWssDataOption(HtxAccountWssDataSpot):
     """HTX Option Account WebSocket data feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataOption())
         kwargs.setdefault("asset_type", "OPTION")
         super().__init__(data_queue, **kwargs)

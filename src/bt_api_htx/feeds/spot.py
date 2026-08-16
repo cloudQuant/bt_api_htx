@@ -24,6 +24,7 @@ class HtxRequestDataSpot(HtxRequestData):
     """HTX Spot trading REST API feed."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.logger_name = kwargs.get("logger_name", "htx_spot_feed.log")
@@ -36,12 +37,10 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_ticker(self, symbol, extra_data=None, **kwargs):
         """Get ticker data.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_symbol = self._params.get_symbol(symbol)
@@ -78,11 +77,9 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_ticker(self, symbol, extra_data=None, **kwargs) -> Any:
         """Get ticker data for a symbol.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
 
-        Returns:
-            RequestData: Ticker data
+        Returns: RequestData: Ticker data
 
         """
         path, params, extra_data = self._get_ticker(symbol, extra_data, **kwargs)
@@ -95,13 +92,11 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_depth(self, symbol, depth_type="step0", extra_data=None, **kwargs):
         """Get orderbook depth.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             depth_type: Depth type (step0, step1, step2, step3, step4, step5)
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_symbol = self._params.get_symbol(symbol)
@@ -139,12 +134,10 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_depth(self, symbol, depth_type="step0", extra_data=None, **kwargs) -> Any:
         """Get orderbook depth.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             depth_type: Depth type
 
-        Returns:
-            RequestData: Orderbook data
+        Returns: RequestData: Orderbook data
 
         """
         path, params, extra_data = self._get_depth(symbol, depth_type, extra_data, **kwargs)
@@ -222,14 +215,12 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_kline(self, symbol, period, count=200, extra_data=None, **kwargs):
         """Get kline/candlestick data.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             period: Kline period (1m, 5m, 15m, 30m, 1h, 4h, 1d, 1w, 1M)
             count: Number of klines to return (max 2000)
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_symbol = self._params.get_symbol(symbol)
@@ -269,13 +260,11 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_kline(self, symbol, period, count=200, extra_data=None, **kwargs) -> Any:
         """Get kline/candlestick data.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             period: Kline period
             count: Number of klines
 
-        Returns:
-            RequestData: Kline data
+        Returns: RequestData: Kline data
 
         """
         path, params, extra_data = self._get_kline(symbol, period, count, extra_data, **kwargs)
@@ -286,8 +275,7 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_accounts(self, extra_data=None, **kwargs):
         """Get account list.
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_type = "get_accounts"
@@ -317,8 +305,7 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_accounts(self, extra_data=None, **kwargs) -> Any:
         """Get account list.
 
-        Returns:
-            RequestData: Account list
+        Returns: RequestData: Account list
 
         """
         path, params, extra_data = self._get_accounts(extra_data, **kwargs)
@@ -331,12 +318,10 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_balance(self, account_id=None, extra_data=None, **kwargs):
         """Get account balance.
 
-        Args:
-            account_id: Account ID (if None, uses self.account_id)
+        Args: account_id: Account ID (if None, uses self.account_id)
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         if account_id is None:
@@ -376,11 +361,9 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_balance(self, account_id=None, extra_data=None, **kwargs) -> Any:
         """Get account balance.
 
-        Args:
-            account_id: Account ID
+        Args: account_id: Account ID
 
-        Returns:
-            RequestData: Balance data
+        Returns: RequestData: Balance data
 
         """
         path, params, extra_data = self._get_balance(account_id, extra_data, **kwargs)
@@ -400,16 +383,14 @@ class HtxRequestDataSpot(HtxRequestData):
     ):
         """Place an order.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             vol: Order volume
             price: Order price (required for limit orders)
             order_type: Order type (buy-limit, sell-limit, buy-market, sell-market)
             client_order_id: Client order ID
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, body, extra_data)
+        Returns: tuple: (path, body, extra_data)
 
         """
         request_symbol = self._params.get_symbol(symbol)
@@ -473,15 +454,13 @@ class HtxRequestDataSpot(HtxRequestData):
     ):
         """Place an order.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             vol: Order volume
             price: Order price (required for limit orders)
             order_type: Order type (buy-limit, sell-limit, buy-market, sell-market)
             client_order_id: Client order ID
 
-        Returns:
-            RequestData: Order response
+        Returns: RequestData: Order response
 
         """
         path, body, extra_data = self._make_order(
@@ -492,12 +471,10 @@ class HtxRequestDataSpot(HtxRequestData):
     def _cancel_order(self, order_id, extra_data=None, **kwargs):
         """Cancel an order.
 
-        Args:
-            order_id: Order ID to cancel
+        Args: order_id: Order ID to cancel
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_type = "cancel_order"
@@ -518,11 +495,9 @@ class HtxRequestDataSpot(HtxRequestData):
     def cancel_order(self, order_id, extra_data=None, **kwargs):
         """Cancel an order.
 
-        Args:
-            order_id: Order ID to cancel
+        Args: order_id: Order ID to cancel
 
-        Returns:
-            RequestData: Cancellation response
+        Returns: RequestData: Cancellation response
 
         """
         path, params, extra_data = self._cancel_order(order_id, extra_data, **kwargs)
@@ -531,12 +506,10 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_order(self, order_id, extra_data=None, **kwargs):
         """Get order details.
 
-        Args:
-            order_id: Order ID
+        Args: order_id: Order ID
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_type = "get_order"
@@ -571,11 +544,9 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_order(self, order_id, extra_data=None, **kwargs) -> Any:
         """Get order details.
 
-        Args:
-            order_id: Order ID
+        Args: order_id: Order ID
 
-        Returns:
-            RequestData: Order details
+        Returns: RequestData: Order details
 
         """
         path, params, extra_data = self._get_order(order_id, extra_data, **kwargs)
@@ -584,13 +555,11 @@ class HtxRequestDataSpot(HtxRequestData):
     def _get_orders(self, symbol, states="submitted,partial-filled", **kwargs):
         """Get order list.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             states: Order states (comma-separated)
             extra_data: Extra data for processing
 
-        Returns:
-            tuple: (path, params, extra_data)
+        Returns: tuple: (path, params, extra_data)
 
         """
         request_symbol = self._params.get_symbol(symbol)
@@ -631,12 +600,10 @@ class HtxRequestDataSpot(HtxRequestData):
     ) -> Any:
         """Get order list.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             states: Order states
 
-        Returns:
-            RequestData: Order list
+        Returns: RequestData: Order list
 
         """
         kwargs["extra_data"] = extra_data
@@ -650,12 +617,10 @@ class HtxRequestDataSpot(HtxRequestData):
     def get_open_orders(self, symbol=None, extra_data=None, **kwargs) -> Any:
         """Get open orders for a symbol.
 
-        Args:
-            symbol: Trading pair symbol
+        Args: symbol: Trading pair symbol
             extra_data: Extra data for processing
 
-        Returns:
-            RequestData: Open orders list
+        Returns: RequestData: Open orders list
 
         """
         request_type = "get_open_orders"
@@ -733,6 +698,7 @@ class HtxMarketWssDataSpot(MyWebsocketApp):
     """
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataSpot())
         # HTX uses application-level JSON ping/pong, disable protocol-level pings
         kwargs.setdefault("ping_interval", 0)
@@ -745,6 +711,7 @@ class HtxMarketWssDataSpot(MyWebsocketApp):
         self.logger = get_logger("htx_market_wss")
 
     def open_rsp(self):
+        """open_rsp method"""
         self.wss_logger.info(f"===== {self.exchange_name} Market Websocket Connected =====")
         self._init()
 
@@ -813,6 +780,7 @@ class HtxMarketWssDataSpot(MyWebsocketApp):
             self.push_ticker(content)
 
     def push_ticker(self, content):
+        """push_ticker method"""
         ch = content.get("ch", "")
         parts = ch.split(".")
         symbol = parts[1] if len(parts) > 1 else "UNKNOWN"
@@ -820,6 +788,7 @@ class HtxMarketWssDataSpot(MyWebsocketApp):
         self.data_queue.put(ticker_data)
 
     def push_order_book(self, content):
+        """push_order_book method"""
         ch = content.get("ch", "")
         parts = ch.split(".")
         symbol = parts[1] if len(parts) > 1 else "UNKNOWN"
@@ -827,6 +796,7 @@ class HtxMarketWssDataSpot(MyWebsocketApp):
         self.data_queue.put(order_book_data)
 
     def push_bar(self, content):
+        """push_bar method"""
         ch = content.get("ch", "")
         parts = ch.split(".")
         symbol = parts[1] if len(parts) > 1 else "UNKNOWN"
@@ -834,6 +804,7 @@ class HtxMarketWssDataSpot(MyWebsocketApp):
         self.data_queue.put(bar_data)
 
     def push_trade(self, content):
+        """push_trade method"""
         ch = content.get("ch", "")
         parts = ch.split(".")
         symbol = parts[1] if len(parts) > 1 else "UNKNOWN"
@@ -851,6 +822,7 @@ class HtxAccountWssDataSpot(MyWebsocketApp):
     """
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         kwargs.setdefault("exchange_data", HtxExchangeDataSpot())
         # Use acct_wss_url for account WebSocket
         params = kwargs.get("exchange_data", HtxExchangeDataSpot())
@@ -906,6 +878,7 @@ class HtxAccountWssDataSpot(MyWebsocketApp):
         }
 
     def open_rsp(self):
+        """open_rsp method"""
         self.wss_logger.info(f"===== {self.exchange_name} Account Websocket Connected =====")
         # Send authentication
         auth_msg = json.dumps(self._build_auth_params())
@@ -973,6 +946,7 @@ class HtxAccountWssDataSpot(MyWebsocketApp):
             self.push_trade(content)
 
     def push_order(self, content):
+        """push_order method"""
         data = content.get("data", {})
         symbol = data.get("symbol", "UNKNOWN")
         from bt_api_htx.containers.orders.htx_order import HtxRequestOrderData
@@ -981,6 +955,7 @@ class HtxAccountWssDataSpot(MyWebsocketApp):
         self.data_queue.put(order_data)
 
     def push_account(self, content):
+        """push_account method"""
         data = content.get("data", {})
         symbol = "ALL"
 
@@ -988,6 +963,7 @@ class HtxAccountWssDataSpot(MyWebsocketApp):
         self.data_queue.put(account_data)
 
     def push_trade(self, content):
+        """push_trade method"""
         data = content.get("data", {})
         symbol = data.get("symbol", "UNKNOWN")
         trade_data = HtxRequestTradeData(data, symbol, self.asset_type, True)

@@ -13,6 +13,7 @@ class HtxRequestTradeData(TradeData):
     """HTX REST API trade data."""
 
     def __init__(self, trade_info, symbol_name, asset_type, has_been_json_encoded=False) -> None:
+        """__init__ method"""
         super().__init__(trade_info, has_been_json_encoded)
         self.exchange_name = "HTX"
         self.local_update_time = time.time()
@@ -83,6 +84,7 @@ class HtxRequestTradeData(TradeData):
         self.has_been_init_data = True
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
                 "exchange_name": self.exchange_name,
@@ -108,45 +110,57 @@ class HtxRequestTradeData(TradeData):
         return self.__str__()
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_trade_id(self):
+        """get_trade_id method"""
         self.init_data()
         return self.trade_id
 
     def get_order_id(self):
+        """get_order_id method"""
         self.init_data()
         return self.order_id
 
     def get_trade_symbol_name(self):
+        """get_trade_symbol_name method"""
         self.init_data()
         return self.trade_symbol_name
 
     def get_trade_side(self):
+        """get_trade_side method"""
         self.init_data()
         return self.trade_side
 
     def get_trade_price(self):
+        """get_trade_price method"""
         self.init_data()
         return self.trade_price
 
     def get_trade_qty(self):
+        """get_trade_qty method"""
         self.init_data()
         return self.trade_qty
 
     def get_trade_fee(self):
+        """get_trade_fee method"""
         self.init_data()
         return self.trade_fee
 
     def get_trade_time(self):
+        """get_trade_time method"""
         self.init_data()
         return self.trade_time

@@ -11,13 +11,13 @@ from bt_api_base.logging_factory import get_logger
 
 logger = get_logger("htx_exchange_data")
 
-# ── 配置加载缓存 ──────────────────────────────────────────────
+# ──  ──────────────────────────────────────────────
 _htx_config = None
 _htx_config_loaded = False
 
 
 def _get_htx_config() -> Any | None:
-    """延迟加载并缓存 HTX YAML 配置."""
+    """ HTX YAML ."""
     global _htx_config, _htx_config_loaded
     if _htx_config_loaded:
         return _htx_config
@@ -46,6 +46,7 @@ class HtxExchangeData(ExchangeData):
     """
 
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "htx"
         self.rest_url = ""
@@ -88,12 +89,10 @@ class HtxExchangeData(ExchangeData):
         ]
 
     def _load_from_config(self, asset_type) -> bool:
-        """从 YAML 配置文件加载交易所参数.
+        """ YAML .
 
-        Args:
-            asset_type: 资产类型 key, 如 'swap', 'spot', 'futures' 等
-        Returns:
-            bool: 是否加载成功
+        Args: asset_type:  key,  'swap', 'spot', 'futures'
+        Returns: bool:
 
         """
         config = _get_htx_config()
@@ -113,11 +112,11 @@ class HtxExchangeData(ExchangeData):
             self.wss_url = config.base_urls.wss.get(asset_type, self.wss_url)
             self.acct_wss_url = config.base_urls.acct_wss.get(asset_type, self.acct_wss_url)
 
-        # rest_paths (直接使用, 格式一致)
+        # rest_paths (, )
         if asset_cfg.rest_paths:
             self.rest_paths = dict(asset_cfg.rest_paths)
 
-        # wss_paths: YAML 模板字符串 → {'params': [template], 'method': 'SUBSCRIBE', 'id': 1}
+        # wss_paths: YAML  → {'params': [template], 'method': 'SUBSCRIBE', 'id': 1}
         if asset_cfg.wss_paths:
             converted = {}
             for key, value in asset_cfg.wss_paths.items():
@@ -130,13 +129,13 @@ class HtxExchangeData(ExchangeData):
                     converted[key] = value
             self.wss_paths = converted
 
-        # kline_periods (asset-level 优先, 否则用 exchange-level)
+        # kline_periods (asset-level ,  exchange-level)
         kp = asset_cfg.kline_periods or (config.kline_periods if config.kline_periods else None)
         if kp:
             self.kline_periods = dict(kp)
             self.reverse_kline_periods = {v: k for k, v in self.kline_periods.items()}
 
-        # legal_currency (asset-level 优先, 否则用 exchange-level)
+        # legal_currency (asset-level ,  exchange-level)
         lc = asset_cfg.legal_currency or (config.legal_currency if config.legal_currency else None)
         if lc:
             self.legal_currency = list(lc)
@@ -146,11 +145,9 @@ class HtxExchangeData(ExchangeData):
     def get_rest_path(self, path_name: str, **kwargs) -> str:
         """Get REST API path by name.
 
-        Args:
-            path_name: Path name key
+        Args: path_name: Path name key
 
-        Returns:
-            str: REST API path
+        Returns: str: REST API path
 
         """
         return self.rest_paths.get(path_name, "")
@@ -161,11 +158,9 @@ class HtxExchangeData(ExchangeData):
         HTX market WSS v1 format: {"sub": "market.btcusdt.depth.step0", "id": "id1"}
         HTX account WSS v2 format: {"action": "sub", "ch": "orders#btcusdt"}
 
-        Args:
-            kwargs: topic, symbol, period, type, etc.
+        Args: kwargs: topic, symbol, period, type, etc.
 
-        Returns:
-            str: JSON subscription message
+        Returns: str: JSON subscription message
 
         """
         topic = kwargs.get("topic", "")
@@ -198,11 +193,9 @@ class HtxExchangeData(ExchangeData):
 
         HTX uses lowercase format (e.g., 'btcusdt').
 
-        Args:
-            symbol: Standard symbol (e.g., 'BTCUSDT', 'BTC/USDT')
+        Args: symbol: Standard symbol (e.g., 'BTCUSDT', 'BTC/USDT')
 
-        Returns:
-            str: HTX symbol format
+        Returns: str: HTX symbol format
 
         """
         if not symbol:
@@ -217,11 +210,9 @@ class HtxExchangeData(ExchangeData):
     def get_period(self, period: str) -> str:
         """Convert standard period to HTX period format.
 
-        Args:
-            period: Standard period (e.g., '1m', '1h', '1d')
+        Args: period: Standard period (e.g., '1m', '1h', '1d')
 
-        Returns:
-            str: HTX period format
+        Returns: str: HTX period format
 
         """
         return self.kline_periods.get(period, period)
@@ -229,11 +220,9 @@ class HtxExchangeData(ExchangeData):
     def get_standard_period(self, period: str) -> str:
         """Convert HTX period to standard period format.
 
-        Args:
-            period: HTX period (e.g., '1min', '60min', '1day')
+        Args: period: HTX period (e.g., '1min', '60min', '1day')
 
-        Returns:
-            str: Standard period format
+        Returns: str: Standard period format
 
         """
         return self.reverse_kline_periods.get(period, period)
@@ -243,6 +232,7 @@ class HtxExchangeDataSpot(HtxExchangeData):
     """HTX Spot trading configuration."""
 
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "htx_spot"
         self.asset_type = "SPOT"
@@ -255,6 +245,7 @@ class HtxExchangeDataMargin(HtxExchangeData):
     """HTX Margin trading configuration."""
 
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "htx_margin"
         self.asset_type = "MARGIN"
@@ -271,6 +262,7 @@ class HtxExchangeDataUsdtSwap(HtxExchangeData):
     """
 
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "htx_usdt_swap"
         self.asset_type = "USDT_SWAP"
@@ -300,6 +292,7 @@ class HtxExchangeDataCoinSwap(HtxExchangeData):
     """
 
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "htx_coin_swap"
         self.asset_type = "COIN_SWAP"
@@ -328,6 +321,7 @@ class HtxExchangeDataOption(HtxExchangeData):
     """
 
     def __init__(self) -> None:
+        """__init__ method"""
         super().__init__()
         self.exchange_name = "htx_option"
         self.asset_type = "OPTION"

@@ -16,8 +16,7 @@ class HtxSpotRequestAccountData(AccountData):
     This class handles account data from HTX (Huobi) exchange's REST API.
     It parses and stores account information including account ID, margins, etc.
 
-    Attributes:
-        exchange_name: Exchange identifier ("HTX").
+    Attributes: exchange_name: Exchange identifier ("HTX").
         account_type: Account type ("SPOT").
         symbol_name: Trading symbol name.
         local_update_time: Local timestamp of last update.
@@ -39,8 +38,7 @@ class HtxSpotRequestAccountData(AccountData):
     ) -> None:
         """Initialize HTX account data container.
 
-        Args:
-            account_info: Account information from HTX API (dict or JSON string).
+        Args: account_info: Account information from HTX API (dict or JSON string).
             symbol_name: Trading symbol name.
             asset_type: Asset type for the account.
             has_been_json_encoded: Whether account_info is already JSON encoded.
@@ -102,8 +100,7 @@ class HtxSpotRequestAccountData(AccountData):
     def get_all_data(self) -> dict[str, Any]:
         """Get all account data as a dictionary.
 
-        Returns:
-            Dictionary containing all account information including exchange name,
+        Returns: Dictionary containing all account information including exchange name,
             account type, symbol name, timestamps, account ID, and margin data.
         """
         if self.all_data is None:
@@ -121,8 +118,7 @@ class HtxSpotRequestAccountData(AccountData):
     def __str__(self) -> str:
         """Return string representation of account data.
 
-        Returns:
-            JSON string of all account data.
+        Returns: JSON string of all account data.
         """
         self.init_data()
         return json.dumps(self.get_all_data())
@@ -130,48 +126,42 @@ class HtxSpotRequestAccountData(AccountData):
     def __repr__(self) -> str:
         """Return representation of account data.
 
-        Returns:
-            Same as __str__.
+        Returns: Same as __str__.
         """
         return self.__str__()
 
     def get_exchange_name(self) -> str:
         """Get exchange name.
 
-        Returns:
-            Exchange name "HTX".
+        Returns: Exchange name "HTX".
         """
         return self.exchange_name
 
     def get_symbol_name(self) -> str:
         """Get symbol name.
 
-        Returns:
-            Trading symbol name.
+        Returns: Trading symbol name.
         """
         return self.symbol_name
 
     def get_asset_type(self) -> str:
         """Get asset type.
 
-        Returns:
-            Asset type for the account.
+        Returns: Asset type for the account.
         """
         return self.asset_type
 
     def get_local_update_time(self) -> float:
         """Get local update timestamp.
 
-        Returns:
-            Local timestamp when data was last updated.
+        Returns: Local timestamp when data was last updated.
         """
         return self.local_update_time
 
     def get_account_id(self) -> str | None:
         """Get account ID.
 
-        Returns:
-            Account identifier or None if not initialized.
+        Returns: Account identifier or None if not initialized.
         """
         self.init_data()
         return self.account_id
@@ -179,23 +169,20 @@ class HtxSpotRequestAccountData(AccountData):
     def get_account_type(self) -> str:
         """Get account type.
 
-        Returns:
-            Account type "SPOT".
+        Returns: Account type "SPOT".
         """
         return self.account_type
 
     def get_available_margin(self) -> float | None:
         """Get available margin.
 
-        Returns:
-            Available margin amount or None.
+        Returns: Available margin amount or None.
         """
         return self.available_margin
 
     def get_used_margin(self) -> float | None:
         """Get used margin.
 
-        Returns:
-            Used margin amount or None.
+        Returns: Used margin amount or None.
         """
         return self.used_margin

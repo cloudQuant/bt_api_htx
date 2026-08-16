@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from bt_api_base.balance_utils import simple_balance_handler as _htx_balance_handler
@@ -114,6 +115,7 @@ def _htx_option_subscribe_handler(data_queue, exchange_params, topics, bt_api):
 
 
 def register_htx(registry: type[ExchangeRegistry]) -> None:
+    """register_htx function"""
     registry.register_feed("HTX___SPOT", HtxRequestDataSpot)
     registry.register_exchange_data("HTX___SPOT", HtxExchangeDataSpot)
     registry.register_balance_handler("HTX___SPOT", _htx_balance_handler)

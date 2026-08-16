@@ -42,6 +42,7 @@ class HtxRequestData(Feed):
         }
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.data_queue = data_queue
         self.public_key = kwargs.get("public_key") or kwargs.get("api_key")
@@ -100,10 +101,10 @@ class HtxRequestData(Feed):
         return RateLimiter(rules)
 
     def push_data_to_queue(self, data):
+        """push_data_to_queue method"""
         if self.data_queue is not None:
             self.data_queue.put(data)
-        else:
-            raise QueueNotInitializedError("data_queue not initialized")
+        else: raise QueueNotInitializedError("data_queue not initialized")
 
     # noinspection PyMethodMayBeStatic
     def create_signature(self, method, host, path, params):
@@ -112,14 +113,12 @@ class HtxRequestData(Feed):
         HTX signature format:
         HTTPMethod + "\n" + host + "\n" + path + "\n" + params
 
-        Args:
-            method: HTTP method (GET, POST)
+        Args: method: HTTP method (GET, POST)
             host: API host (e.g., api.huobi.pro)
             path: Request path
             params: Query parameters dict
 
-        Returns:
-            Base64 encoded signature
+        Returns: Base64 encoded signature
         """
         # Sort parameters alphabetically
         sorted_params = sorted(params.items())
@@ -141,13 +140,11 @@ class HtxRequestData(Feed):
     def get_signed_params(self, method, path, params=None):
         """Generate signed parameters for authenticated requests.
 
-        Args:
-            method: HTTP method
+        Args: method: HTTP method
             path: Request path
             params: Query parameters
 
-        Returns:
-            dict: Parameters with signature added
+        Returns: dict: Parameters with signature added
         """
         if params is None:
             params: dict[str, Any] = {}
@@ -173,15 +170,13 @@ class HtxRequestData(Feed):
     def request(self, path, params=None, body=None, extra_data=None, timeout=10):
         """HTTP request function.
 
-        Args:
-            path: Request path (e.g., "GET /v1/order/orders")
+        Args: path: Request path (e.g., "GET /v1/order/orders")
             params: URL query parameters
             body: Request body (for POST requests)
             extra_data: Extra data for processing
             timeout: Request timeout in seconds
 
-        Returns:
-            RequestData: Response data
+        Returns: RequestData: Response data
         """
         if params is None:
             params: dict[str, Any] = {}
@@ -239,15 +234,13 @@ class HtxRequestData(Feed):
     ) -> RequestData:
         """Async HTTP request function.
 
-        Args:
-            path: Request path
+        Args: path: Request path
             params: URL query parameters
             body: Request body
             extra_data: Extra data for processing
             timeout: Request timeout in seconds
 
-        Returns:
-            RequestData: Response data
+        Returns: RequestData: Response data
         """
         if params is None:
             params: dict[str, Any] = {}
@@ -297,8 +290,7 @@ class HtxRequestData(Feed):
     def async_callback(self, future):
         """Callback function for async requests.
 
-        Args:
-            future: asyncio future object
+        Args: future: asyncio future object
         """
         try:
             result = future.result()

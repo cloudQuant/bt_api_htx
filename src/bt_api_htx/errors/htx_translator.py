@@ -67,12 +67,10 @@ class HtxErrorTranslator(ErrorTranslator):
     def translate(cls, raw_error, venue: str = "HTX"):
         """Translate HTX error response to unified error
 
-        Args:
-            raw_error: Raw error response from HTX
+        Args: raw_error: Raw error response from HTX
             venue: Exchange venue name (default: "HTX")
 
-        Returns:
-            UnifiedError or None
+        Returns: UnifiedError or None
         """
         if isinstance(raw_error, str):
             # String error messages
