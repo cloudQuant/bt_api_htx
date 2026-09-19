@@ -103,7 +103,8 @@ class HtxRequestData(Feed):
         """push_data_to_queue method"""
         if self.data_queue is not None:
             self.data_queue.put(data)
-        else: raise QueueNotInitializedError("data_queue not initialized")
+        else:
+            raise QueueNotInitializedError("data_queue not initialized")
 
     # noinspection PyMethodMayBeStatic
     def create_signature(self, method, host, path, params):
