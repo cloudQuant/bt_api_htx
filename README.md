@@ -1,4 +1,4 @@
-# HTX (Huobi)
+﻿# HTX (Huobi)
 
 HTX (Huobi) exchange plugin for bt_api, supporting Spot and Derivatives trading.
 

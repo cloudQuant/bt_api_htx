@@ -1,4 +1,4 @@
-# HTX (Huobi) Documentation
+﻿# HTX (Huobi) Documentation
 
 ## English
 
