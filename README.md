@@ -203,3 +203,11 @@ MIT 许可证 - 详见 [LICENSE](LICENSE)。
 
 - 通过 [GitHub Issues](https://github.com/cloudQuant/bt_api_htx/issues) 反馈问题
 - 邮箱: yunjinqi@gmail.com
+
+## Provider role and integration boundary
+
+`plugin.py` advertises `HTX___SPOT`, `HTX___MARGIN`, `HTX___USDT_SWAP`, `HTX___COIN_SWAP`, and `HTX___OPTION`. `registry_registration.py` wires request feeds, exchange-data and balance handlers; its subscribe handlers start market and account WebSocket consumers. This describes the provider data path, not proof of order execution or production live-trading readiness. This package owns HTX-specific API adaptation; `bt_api_base` supplies the shared plugin protocol and registry, while Backtrader owns strategy and backtest logic. See [Trading system architecture](https://github.com/cloudQuant/backtrader/blob/dev/docs/TRADING_SYSTEM_ARCHITECTURE.md).
+
+## 提供方职责与集成边界
+
+`plugin.py` 列出 `HTX___SPOT`、`HTX___MARGIN`、`HTX___USDT_SWAP`、`HTX___COIN_SWAP` 和 `HTX___OPTION`。`registry_registration.py` 注册请求 Feed、交易所数据及余额处理器；订阅处理器会启动行情与账户 WebSocket 消费者。这说明数据接入路径已接线，并不证明订单执行或实盘交易已验收。本包负责 HTX 专用 API 适配；`bt_api_base` 提供共享插件协议和注册表，Backtrader 负责策略与回测逻辑。架构说明：[Trading system architecture](https://github.com/cloudQuant/backtrader/blob/dev/docs/TRADING_SYSTEM_ARCHITECTURE.md)。
