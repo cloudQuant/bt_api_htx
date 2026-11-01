@@ -15,6 +15,13 @@ dependencies = [
 [project.entry-points."bt_api.plugins"]
 htx = "bt_api_htx.plugin:register_plugin"
 
+[project.entry-points."bt_api.order_identity_projections"]
+HTX___SPOT = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+HTX___MARGIN = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+HTX___USDT_SWAP = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+HTX___COIN_SWAP = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+HTX___OPTION = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
