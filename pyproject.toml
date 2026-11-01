@@ -29,6 +29,13 @@ HTX___USDT_SWAP = "bt_api_base.order_request_projection:legacy_order_request_pro
 HTX___COIN_SWAP = "bt_api_base.order_request_projection:legacy_order_request_projection"
 HTX___OPTION = "bt_api_base.order_request_projection:legacy_order_request_projection"
 
+[project.entry-points."bt_api.order_quantity_unit_validators"]
+HTX___SPOT = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+HTX___MARGIN = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+HTX___USDT_SWAP = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+HTX___COIN_SWAP = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+HTX___OPTION = "bt_api_base.order_quantity_units:validate_generic_order_quantity_units"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
