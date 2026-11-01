@@ -49,3 +49,10 @@ ignore = [
     "TRY003",  # error messages are valid outside exception class
 ]
 
+
+[project.entry-points."bt_api.fee_projections"]
+HTX___SPOT = "bt_api_base.fee_projection:legacy_fee_projection"
+HTX___MARGIN = "bt_api_base.fee_projection:legacy_fee_projection"
+HTX___USDT_SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
+HTX___COIN_SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
+HTX___OPTION = "bt_api_base.fee_projection:legacy_fee_projection"
