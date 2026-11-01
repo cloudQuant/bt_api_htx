@@ -56,3 +56,10 @@ HTX___MARGIN = "bt_api_base.fee_projection:legacy_fee_projection"
 HTX___USDT_SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
 HTX___COIN_SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
 HTX___OPTION = "bt_api_base.fee_projection:legacy_fee_projection"
+
+[project.entry-points."bt_api.order_side_projections"]
+HTX___SPOT = "bt_api_base.order_side_projection:legacy_order_side_candidates"
+HTX___MARGIN = "bt_api_base.order_side_projection:legacy_order_side_candidates"
+HTX___USDT_SWAP = "bt_api_base.order_side_projection:legacy_order_side_candidates"
+HTX___COIN_SWAP = "bt_api_base.order_side_projection:legacy_order_side_candidates"
+HTX___OPTION = "bt_api_base.order_side_projection:legacy_order_side_candidates"
