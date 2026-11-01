@@ -22,6 +22,13 @@ HTX___USDT_SWAP = "bt_api_base.order_identity_projection:project_legacy_order_id
 HTX___COIN_SWAP = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 HTX___OPTION = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 
+[project.entry-points."bt_api.order_request_projections"]
+HTX___SPOT = "bt_api_base.order_request_projection:legacy_order_request_projection"
+HTX___MARGIN = "bt_api_base.order_request_projection:legacy_order_request_projection"
+HTX___USDT_SWAP = "bt_api_base.order_request_projection:legacy_order_request_projection"
+HTX___COIN_SWAP = "bt_api_base.order_request_projection:legacy_order_request_projection"
+HTX___OPTION = "bt_api_base.order_request_projection:legacy_order_request_projection"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
